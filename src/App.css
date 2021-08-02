@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+
+/* custom */
+
+#root{
+  text-align: center;
+}
+
+form{
+  display: flex;
+  flex-direction:column;
+}
+
+label{
+  margin: 2%;
+}
+
+button {
+  width:50%;
+  max-width: 250px;
+  margin:auto;
+}
+
+.descriptionNote{
+  max-width: 200px;
+  margin: auto;
+  margin-bottom: 2%;
+}
