@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { signUser } from '../controller/firebaseAuth';
+import handleInput from '../controller/formHandles';
 
 export default function Login() {
   const history = useHistory();
 
   const initialValueUser = { email: '', password: '' };
   const [user, setUser] = useState(initialValueUser);
-
-  const handleInputChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.id]: e.target.value,
-    });
-  };
 
   const loginUser = (e) => {
     e.preventDefault();
@@ -31,11 +25,11 @@ export default function Login() {
       <h2>Inicia sesión</h2>
       <form onSubmit={loginUser}>
         <label htmlFor="email">
-          <input id="email" type="email" placeholder="Correo electrónico" value={user.email} onChange={handleInputChange} required />
+          <input id="email" type="email" placeholder="Correo electrónico" value={user.email} onChange={(e) => { handleInput.onChange(e, user, setUser); }} required />
         </label>
 
         <label htmlFor="password">
-          <input id="password" type="password" placeholder="Contraseña" value={user.password} onChange={handleInputChange} required />
+          <input id="password" type="password" placeholder="Contraseña" value={user.password} onChange={(e) => { handleInput.onChange(e, user, setUser); }} required />
         </label>
 
         <button type="submit">Iniciar Sesión</button>
