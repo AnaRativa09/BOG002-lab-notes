@@ -7,4 +7,12 @@ const saveNote = async (collection, objDataNote) => {
 
 const updateNote = () => console.log('Holi');
 
-export { saveNote, updateNote };
+// const deleteNote = (id) => db.collection('notes').doc(id).delete().then(() => {
+//   console.log('Document successfully deleted!');
+// })
+//   .catch((error) => {
+//   console.error('Error removing document: ', error);
+// });
+const editNote = () => console.log('Holi');
+
+export { saveNote, updateNote, editNote };

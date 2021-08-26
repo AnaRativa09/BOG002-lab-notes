@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { firebase } from '../controller/firebaseConfig';
+// import { firebase } from '../controller/firebaseConfig';
+import { saveUser } from '../controller/firebaseAuth';
 
 export default function Login() {
   const history = useHistory();
@@ -18,16 +19,17 @@ export default function Login() {
   const loginUser = (e) => {
     e.preventDefault();
 
-    firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(() => {
-      history.push('/dashboard');
-      console.log('logueado');
-    });
+    saveUser(user.email, user.password)
+      .then(() => {
+        history.push('/dashboard');
+        console.log('logueado');
+      })
+      .catch(error => console.error(error))
   };
 
   return (
     <>
       <h2>Inicia sesión</h2>
-
       <form onSubmit={loginUser}>
         <label htmlFor="email">
           <input id="email" type="email" placeholder="Correo electrónico" value={user.email} onChange={handleInputChange} required />
