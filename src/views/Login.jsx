@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { firebase } from '../controller/firebaseConfig';
-import { saveUser } from '../controller/firebaseAuth';
+import { signUser } from '../controller/firebaseAuth';
 
 export default function Login() {
   const history = useHistory();
@@ -19,12 +18,12 @@ export default function Login() {
   const loginUser = (e) => {
     e.preventDefault();
 
-    saveUser(user.email, user.password)
+    signUser(user.email, user.password)
       .then(() => {
         history.push('/dashboard');
         console.log('logueado');
       })
-      .catch(error => console.error(error))
+      .catch((error) => console.error(error));
   };
 
   return (
