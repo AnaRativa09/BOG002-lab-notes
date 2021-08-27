@@ -1,7 +1,7 @@
 // Handle input onChanfe
-const onChange = (e, user, setUser) => {
-  setUser({
-    ...user,
+const onChange = (e, state, setState) => {
+  setState({
+    ...state,
     [e.target.id]: e.target.value,
   });
 };

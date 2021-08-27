@@ -14,6 +14,19 @@ const updateNote = (collection, id, objUpdateNote) => {
 // Delete note
 const deleteNote = (id) => db.collection('notes').doc(id).delete();
 
+// Get notes
+const getNotes = (collection, setState) => {
+  db.collection(collection).onSnapshot((querySnapshot) => {
+    const data = [];
+
+    querySnapshot.forEach((doc) => {
+      data.push({ ...doc.data(), id: doc.id });
+    });
+
+    return setState(data);
+  });
+};
+
 export {
-  saveNote, getEditNote, updateNote, deleteNote,
+  saveNote, getEditNote, updateNote, deleteNote, getNotes,
 };

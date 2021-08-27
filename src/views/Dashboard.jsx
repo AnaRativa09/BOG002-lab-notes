@@ -1,41 +1,31 @@
-import React, { useState } from 'react';
-import { saveNote } from '../controller/firestore';
+import React, { useState, useEffect } from 'react';
+import { getNotes } from '../controller/firestore';
+import FormNotes from '../components/formNotes';
+
+import '../styles/Dashboard.css';
 
 export default function Dashboard() {
-  const initialValueNotes = { title: '', description: '' };
-  const [note, setNote] = useState(initialValueNotes);
+  const [dataNotes, setDataNotes] = useState([]);
 
-  const handleInputChange = (e) => {
-    setNote({
-      ...note,
-      [e.target.id]: e.target.value,
-    });
-  };
-
-  const saveData = (e) => {
-    e.preventDefault();
-    saveNote('notes', note)
-      .then(() => {
-        alert('Nota guardada');
-        setNote(initialValueNotes);
-        document.getElementById('noteForm').reset();
-      })
-      .catch((error) => { console.error(error); });
-  };
+  useEffect(() => {
+    getNotes('notes', setDataNotes);
+  }, []);
 
   return (
     <>
       <h2>Aquí ves y creas notas</h2>
 
-      <form onSubmit={saveData} id="noteForm">
-        <label htmlFor="title">
-          <input id="title" type="text" placeholder="Título" value={note.title} onChange={handleInputChange} required />
-        </label>
+      <FormNotes />
 
-        <textarea id="description" className="descriptionNote" name="description" placeholder="Descripción" value={note.description} onChange={handleInputChange} />
+      {
+        dataNotes.map((dataNote) => (
+          <div key={dataNote.id} className="note-container">
+            <h3>{ dataNote.title }</h3>
+            <p>{ dataNote.description }</p>
+          </div>
+        ))
+      }
 
-        <button type="submit">Crear nota</button>
-      </form>
     </>
   );
 }
