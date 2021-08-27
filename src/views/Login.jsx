@@ -25,11 +25,25 @@ export default function Login() {
       <h2>Inicia sesión</h2>
       <form onSubmit={loginUser}>
         <label htmlFor="email">
-          <input id="email" type="email" placeholder="Correo electrónico" value={user.email} onChange={(e) => { handleInput.onChange(e, user, setUser); }} required />
+          <input
+            id="email"
+            type="email"
+            placeholder="Correo electrónico"
+            value={user.email}
+            onChange={(e) => { handleInput.onChange(e, user, setUser); }}
+            required
+          />
         </label>
 
         <label htmlFor="password">
-          <input id="password" type="password" placeholder="Contraseña" value={user.password} onChange={(e) => { handleInput.onChange(e, user, setUser); }} required />
+          <input
+            id="password"
+            type="password"
+            placeholder="Contraseña"
+            value={user.password}
+            onChange={(e) => { handleInput.onChange(e, user, setUser); }}
+            required
+          />
         </label>
 
         <button type="submit">Iniciar Sesión</button>

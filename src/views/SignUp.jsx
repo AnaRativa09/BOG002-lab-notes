@@ -26,11 +26,25 @@ export default function SignUp() {
 
       <form onSubmit={signUpUser}>
         <label htmlFor="email">
-          <input id="email" type="email" placeholder="Correo electrónico" value={user.email} onChange={(e) => { handleInput.onChange(e, user, setUser); }} required />
+          <input
+            id="email"
+            type="email"
+            placeholder="Correo electrónico"
+            value={user.email}
+            onChange={(e) => { handleInput.onChange(e, user, setUser); }}
+            required
+          />
         </label>
 
         <label htmlFor="password">
-          <input id="password" type="password" placeholder="Contraseña" value={user.password} onChange={(e) => { handleInput.onChange(e, user, setUser); }} required />
+          <input
+            id="password"
+            type="password"
+            placeholder="Contraseña"
+            value={user.password}
+            onChange={(e) => { handleInput.onChange(e, user, setUser); }}
+            required
+          />
         </label>
 
         <button type="submit">Crear cuenta</button>

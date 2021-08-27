@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-export function Home() {
+export default function Home() {
   const history = useHistory();
 
   return (
@@ -10,14 +10,6 @@ export function Home() {
       <p>Guarda tus notas de forma segura :)</p>
       <button type="button" onClick={() => { history.push('/login'); }}>Inicia sesión</button>
       <button type="button" onClick={() => { history.push('/signup'); }}>Regístrate</button>
-    </>
-  );
-}
-
-export function Hola() {
-  return (
-    <>
-      <h1>Mi otra función</h1>
     </>
   );
 }
