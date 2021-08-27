@@ -1,18 +1,19 @@
 import { db } from './firebaseConfig';
 
 // Add docs to collection
-const saveNote = async (collection, objDataNote) => {
-  await db.collection(collection).doc().set(objDataNote);
+const saveNote = (collection, objDataNote) => db.collection(collection).doc().set(objDataNote);
+
+// Get edit notes for
+const getEditNote = (id) => db.collection('review').doc(id).get();
+
+// Update note
+const updateNote = (collection, id, objUpdateNote) => {
+  db.collection(collection).doc(id).update(objUpdateNote);
 };
 
-const updateNote = () => console.log('Holi');
+// Delete note
+const deleteNote = (id) => db.collection('notes').doc(id).delete();
 
-// const deleteNote = (id) => db.collection('notes').doc(id).delete().then(() => {
-//   console.log('Document successfully deleted!');
-// })
-//   .catch((error) => {
-//   console.error('Error removing document: ', error);
-// });
-const editNote = () => console.log('Holi');
-
-export { saveNote, updateNote, editNote };
+export {
+  saveNote, getEditNote, updateNote, deleteNote,
+};

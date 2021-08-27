@@ -14,10 +14,13 @@ export default function Dashboard() {
 
   const saveData = (e) => {
     e.preventDefault();
-    saveNote('notes', note);
-    setNote(initialValueNotes);
-    alert('Nota guardada');
-    document.getElementById('noteForm').reset();
+    saveNote('notes', note)
+      .then(() => {
+        alert('Nota guardada');
+        setNote(initialValueNotes);
+        document.getElementById('noteForm').reset();
+      })
+      .catch((error) => { console.error(error); });
   };
 
   return (
@@ -29,7 +32,7 @@ export default function Dashboard() {
           <input id="title" type="text" placeholder="Título" value={note.title} onChange={handleInputChange} required />
         </label>
 
-        <textarea id="description" className="descriptionNote" name="description" placeholder="Descripción" value={note.title} onChange={handleInputChange} />
+        <textarea id="description" className="descriptionNote" name="description" placeholder="Descripción" value={note.description} onChange={handleInputChange} />
 
         <button type="submit">Crear nota</button>
       </form>
