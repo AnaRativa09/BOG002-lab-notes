@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import handleInput from '../controller/formHandles';
 import { saveNote } from '../controller/firestore';
 
-export default function ormNotes() {
+export default function FormNotes() {
   const initialValueNotes = { title: '', description: '' };
   const [note, setNote] = useState(initialValueNotes);
 
