@@ -1,9 +1,7 @@
-// Handle input onChanfe
-const onChange = (e, state, setState) => {
+// Handle input onChange
+export const handleInput = (e, state, setState) => {
   setState({
     ...state,
     [e.target.id]: e.target.value,
   });
 };
-
-export default { onChange };
