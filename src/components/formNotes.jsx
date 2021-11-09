@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import handleInput from '../controller/formHandles';
-import { saveNote } from '../controller/firestore';
+import { handleInput } from '../controller/formHandles';
+import { saveNote } from '../controller/firebaseFirestore';
 
 export default function FormNotes() {
+
   const initialValueNotes = { title: '', description: '' };
   const [note, setNote] = useState(initialValueNotes);
+  const [error, setError] = useState(null);
 
   const saveData = (e) => {
     e.preventDefault();
@@ -13,7 +15,10 @@ export default function FormNotes() {
         setNote(initialValueNotes);
         document.getElementById('noteForm').reset();
       })
-      .catch((error) => { console.error(error); });
+      .catch((err) => { 
+        setError(err.message);
+        setTimeout(() => setError(''), 2000);
+      });
   };
 
   return (
@@ -25,7 +30,7 @@ export default function FormNotes() {
             type="text"
             placeholder="Título"
             value={note.title}
-            onChange={(e) => { handleInput.onChange(e, note, setNote); }}
+            onChange={(e) => { handleInput(e, note, setNote); }}
             required
           />
         </label>
@@ -36,7 +41,7 @@ export default function FormNotes() {
           name="description"
           placeholder="Descripción"
           value={note.description}
-          onChange={(e) => { handleInput.onChange(e, note, setNote); }}
+          onChange={(e) => { handleInput(e, note, setNote); }}
         />
 
         <button type="submit">Crear nota</button>

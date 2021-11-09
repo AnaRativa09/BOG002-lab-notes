@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { signUser } from '../controller/firebaseAuth';
-import handleInput from '../controller/formHandles';
+import { handleInput } from '../controller/formHandles';
 
 export default function Login() {
   const history = useHistory();
 
   const initialValueUser = { email: '', password: '' };
   const [user, setUser] = useState(initialValueUser);
+  const [error, setError] = useState(null);
 
-  const loginUser = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     signUser(user.email, user.password)
@@ -17,20 +18,23 @@ export default function Login() {
         history.push('/dashboard');
         console.log('logueado');
       })
-      .catch((error) => console.error(error));
+      .catch((err) => {
+        setError(err.message);
+        setTimeout(() => setError(''), 2000);
+      });
   };
 
   return (
     <>
       <h2>Inicia sesión</h2>
-      <form onSubmit={loginUser}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="email">
           <input
             id="email"
             type="email"
             placeholder="Correo electrónico"
             value={user.email}
-            onChange={(e) => { handleInput.onChange(e, user, setUser); }}
+            onChange={(e) => { handleInput(e, user, setUser); }}
             required
           />
         </label>
@@ -41,10 +45,12 @@ export default function Login() {
             type="password"
             placeholder="Contraseña"
             value={user.password}
-            onChange={(e) => { handleInput.onChange(e, user, setUser); }}
+            onChange={(e) => { handleInput(e, user, setUser); }}
             required
           />
         </label>
+
+        {error && (<p className="error">{`Error: ${error}`}</p>)}
 
         <button type="submit">Iniciar Sesión</button>
       </form>
