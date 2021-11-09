@@ -15,11 +15,11 @@ export default function Dashboard() {
   const userLogOut = () => {
     signOutUser()
       .then(() => {
-        console.log('Cerrando sesión')
+        console.log('Cerrando sesión');
         history.push('/');
       })
-      .catch(err => console.error(err));
-  }
+      .catch((err) => console.error(err));
+  };
 
   useEffect(() => {
     getNotes('notes', setDataNotes);

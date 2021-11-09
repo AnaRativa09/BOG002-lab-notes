@@ -12,4 +12,6 @@ const updateUser = () => console.log('Holi');
 // Sign out
 const signOutUser = () => auth.signOut();
 
-export { saveUser, signUser, updateUser, signOutUser };
+export {
+  saveUser, signUser, updateUser, signOutUser,
+};

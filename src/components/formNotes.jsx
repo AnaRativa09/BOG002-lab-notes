@@ -3,7 +3,6 @@ import { handleInput } from '../controller/formHandles';
 import { saveNote } from '../controller/firebaseFirestore';
 
 export default function FormNotes() {
-
   const initialValueNotes = { title: '', description: '' };
   const [note, setNote] = useState(initialValueNotes);
   const [error, setError] = useState(null);
@@ -15,7 +14,7 @@ export default function FormNotes() {
         setNote(initialValueNotes);
         document.getElementById('noteForm').reset();
       })
-      .catch((err) => { 
+      .catch((err) => {
         setError(err.message);
         setTimeout(() => setError(''), 2000);
       });

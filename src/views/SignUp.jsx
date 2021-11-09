@@ -20,7 +20,7 @@ export default function SignUp() {
       })
       .catch((err) => {
         setError(err.message);
-        setTimeout(() => setError(''), 2000);  
+        setTimeout(() => setError(''), 2000);
       });
   };
 
