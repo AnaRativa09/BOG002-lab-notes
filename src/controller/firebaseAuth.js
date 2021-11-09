@@ -9,4 +9,7 @@ const signUser = (email, password) => auth.signInWithEmailAndPassword(email, pas
 // Update user
 const updateUser = () => console.log('Holi');
 
-export { saveUser, signUser, updateUser };
+// Sign out
+const signOutUser = () => auth.signOut();
+
+export { saveUser, signUser, updateUser, signOutUser };
