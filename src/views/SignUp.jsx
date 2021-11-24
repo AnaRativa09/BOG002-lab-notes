@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { saveUser } from '../controller/firebaseAuth';
+
+import { useAuth } from '../controller/authContext';
 import { handleInput } from '../controller/formHandles';
 
 export default function SignUp() {
   const history = useHistory();
+  const { createUser } = useAuth();
 
   const initialValueUser = { email: '', password: '' };
   const [user, setUser] = useState(initialValueUser);
@@ -13,7 +15,7 @@ export default function SignUp() {
   const signUpUser = (e) => {
     e.preventDefault();
 
-    saveUser(user.email, user.password)
+    createUser(user.email, user.password)
       .then(() => {
         history.push('/dashboard');
         console.log('logueado');

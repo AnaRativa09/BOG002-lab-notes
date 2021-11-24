@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { signUser } from '../controller/firebaseAuth';
+
+import { useAuth } from '../controller/authContext';
 import { handleInput } from '../controller/formHandles';
 
 export default function Login() {
   const history = useHistory();
+  const { loginUser } = useAuth();
 
   const initialValueUser = { email: '', password: '' };
   const [user, setUser] = useState(initialValueUser);
@@ -13,7 +15,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    signUser(user.email, user.password)
+    loginUser(user.email, user.password)
       .then(() => {
         history.push('/dashboard');
         console.log('logueado');
