@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getNotes } from '../controller/firebaseFirestore';
-import { signOutUser } from '../controller/firebaseAuth';
 
-import FormNotes from '../components/formNotes';
+import { useAuth } from '../controller/authContext';
+import { getNotes } from '../controller/firebaseFirestore';
+
+import FormNotes from '../components/FormNotes';
+import Note from '../components/Note';
 
 import '../styles/Dashboard.css';
 
 export default function Dashboard() {
   const history = useHistory();
+  const { logOutUser } = useAuth();
 
   const [dataNotes, setDataNotes] = useState([]);
 
   const userLogOut = () => {
-    signOutUser()
+    logOutUser()
       .then(() => {
         console.log('Cerrando sesión');
         history.push('/');
@@ -34,10 +37,7 @@ export default function Dashboard() {
 
       {
         dataNotes.map((dataNote) => (
-          <div key={dataNote.id} className="note-container">
-            <h3>{ dataNote.title }</h3>
-            <p>{ dataNote.description }</p>
-          </div>
+          <Note key={dataNote.id} data={dataNote} />
         ))
       }
 
