@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
+
+import { useAuth } from '../controller/authContext';
 import { handleInput } from '../controller/formHandles';
 import { saveNote } from '../controller/firebaseFirestore';
 
 export default function FormNotes() {
-  const initialValueNotes = { title: '', description: '' };
+  const { currentUser } = useAuth();
+
+  const initialValueNotes = {
+    title: '', description: '', date: '', uid: '',
+  };
   const [note, setNote] = useState(initialValueNotes);
   const [error, setError] = useState(null);
+
+  // setNote({ ...note, date: new Date(), uid: currentUser.uid });
 
   const saveData = (e) => {
     e.preventDefault();
@@ -42,6 +50,8 @@ export default function FormNotes() {
           value={note.description}
           onChange={(e) => { handleInput(e, note, setNote); }}
         />
+
+        {error && (<p className="error">{`Error: ${error}`}</p>)}
 
         <button type="submit">Crear nota</button>
       </form>
